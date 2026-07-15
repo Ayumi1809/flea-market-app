@@ -1,0 +1,97 @@
+.mypage {
+    width: 100%;
+    padding-bottom: 80px;
+}
+
+.mypage__profile {
+    display: flex;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.mypage__image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.mypage__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mypage__name {
+    margin-left: 40px;
+    font-size: 20px;
+}
+
+.mypage__edit-button {
+    margin-left: auto;
+    padding: 10px 24px;
+    border: 1px solid #ff5555;
+    border-radius: 4px;
+    color: #ff5555;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.mypage__tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.mypage__tabs a {
+    width: 180px;
+    padding: 16px;
+    color: #666;
+    text-align: center;
+    text-decoration: none;
+}
+
+.mypage__tabs a.active {
+    color: #ff5555;
+    font-weight: bold;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.item-card {
+    color: #000;
+    text-decoration: none;
+}
+
+.item-card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #ddd;
+}
+
+.item-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-card__no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.item-card__name {
+    margin-top: 8px;
+    font-size: 14px;
+}

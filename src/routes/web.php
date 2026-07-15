@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::middleware('auth')->group(function () {
+
+    // マイページ
+    Route::get('/mypage', [ProfileController::class, 'index'])
+        ->name('mypage');
+
+    // プロフィール編集画面
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    // プロフィール更新
+    Route::patch('/mypage/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    // 商品出品画面
+    Route::get('/sell', [ItemController::class, 'create'])
+        ->name('items.create');
+
+    // 商品登録処理
+    Route::post('/sell', [ItemController::class, 'store'])
+        ->name('items.store');
 });

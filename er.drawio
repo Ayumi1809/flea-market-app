@@ -120,7 +120,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="ZRrVyOASF-tUIlWHuAmS" name="ER図">
-        <mxGraphModel dx="1367" dy="775" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="612" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -196,7 +196,7 @@
                 <mxCell id="Kd15qC1tkJUUDNILzGfU-14" value="PK" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
                     <mxGeometry x="610" y="360" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="Kd15qC1tkJUUDNILzGfU-15" value="&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;name&lt;/span&gt;&lt;/div&gt;&lt;div&gt;brand&lt;/div&gt;&lt;div&gt;description&lt;/div&gt;&lt;div&gt;price&lt;/div&gt;&lt;div&gt;condition&lt;/div&gt;&lt;div&gt;image&lt;/div&gt;&lt;div&gt;created_at&lt;/div&gt;&lt;div&gt;updated_at&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;" vertex="1" parent="1">
+                <mxCell id="Kd15qC1tkJUUDNILzGfU-15" value="&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;name&lt;/span&gt;&lt;/div&gt;&lt;div&gt;brand&lt;/div&gt;&lt;div&gt;description&lt;/div&gt;&lt;div&gt;price&lt;/div&gt;&lt;div&gt;condition&lt;/div&gt;&lt;div&gt;image&lt;/div&gt;&lt;div&gt;sold_at&lt;/div&gt;&lt;div&gt;created_at&lt;/div&gt;&lt;div&gt;updated_at&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;" vertex="1" parent="1">
                     <mxGeometry x="710" y="510" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="Kd15qC1tkJUUDNILzGfU-43" value="categories" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
