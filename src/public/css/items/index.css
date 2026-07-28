@@ -1,0 +1,131 @@
+.item-list {
+
+    width: 90%;
+
+    margin: 40px auto;
+
+}
+
+.tab {
+
+    display: flex;
+
+    gap: 60px;
+
+    border-bottom: 1px solid #ccc;
+
+    padding-bottom: 15px;
+
+}
+
+.tab a {
+
+    color: #666;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+.tab .active {
+
+    color: red;
+
+}
+
+.item-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 40px;
+
+    margin-top: 40px;
+
+}
+
+.item-card {
+
+    cursor: pointer;
+
+}
+
+.image-box {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1;
+
+    background: #ddd;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+}
+
+.image-box img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+.item-card p {
+
+    margin-top: 10px;
+
+    font-size: 16px;
+
+}
+
+.sold {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: -35px;
+
+    width: 130px;
+
+    background: red;
+
+    color: #fff;
+
+    text-align: center;
+
+    transform: rotate(-45deg);
+
+    padding: 5px 0;
+
+    font-weight: bold;
+
+}
+
+@media screen and (max-width:1024px) {
+
+    .items {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+}
+
+@media screen and (max-width:768px) {
+
+    .items {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}

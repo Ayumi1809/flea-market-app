@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mypage/index.css') }}">
 @endsection
 
 @section('content')
@@ -49,7 +49,7 @@
         <div class="item-list">
             @forelse ($items as $item)
                 <a
-                    href="{{ route('items.show', $item->id) }}"
+                    href="{{ route('items.show', ['item_id' => $item->id]) }}"
                     class="item-card"
         >
                     <div class="item-card__image">

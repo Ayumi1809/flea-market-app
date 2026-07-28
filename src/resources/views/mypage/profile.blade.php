@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mypage/profile.css') }}">
 @endsection
 
 @section('content')
@@ -24,8 +24,11 @@
                     @if ($user->profile_image)
                         <img
                             src="{{ asset('storage/' . $user->profile_image) }}"
-                            alt="プロフィール画像"
-                        >
+                            alt="プロフィール画像">
+                    @else
+                        <img
+                            src="{{ asset('images/default-profile.png') }}"
+                            alt="デフォルト画像">
                     @endif
                 </div>
 
@@ -35,8 +38,16 @@
                     <input
                         type="file"
                         name="profile_image"
+                        accept="image/png,image/jpeg"
                     >
                 </label>
+
+                @error('profile_image')
+                    <p class="error-message">
+                        {{ $message }}
+                    </p>
+                @enderror
+
             </div>
 
             <div class="form-group">

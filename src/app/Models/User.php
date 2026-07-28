@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Item;
+use App\Models\Purchase;
+use App\Models\Favorite;
 
 class User extends Authenticatable
 {
@@ -45,4 +48,33 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // 出品した商品
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    // 購入した商品
+    public function purchasedItems()
+    {
+        return $this->belongsToMany(
+            Item::class,
+            'purchases',
+            'user_id',
+            'item_id'
+        );
+    }
+
+    // お気に入り情報とのリレーション
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }
