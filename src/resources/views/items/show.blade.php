@@ -203,20 +203,20 @@
             </h2>
 
             @auth
-@if(Route::has('comments.store'))
+
             <form
-                action="{{ route('comments.store', $item) }}"
+                action="{{ route('comments.store', ['item_id' => $item->id]) }}"
                 method="POST"
             >
-@endif
+
                 @csrf
 
                 <textarea
-                    name="content"
-                    rows="6"
-                >{{ old('content') }}</textarea>
+                    name="comment"
+                    rows="5"
+                >{{ old('comment') }}</textarea>
 
-                @error('content')
+                @error('comment')
 
                     <p class="error">
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,14 @@ Route::get('/', [ItemController::class, 'index'])
     ->name('items.index');
 
     // 商品詳細画面
-Route::get('/item/{item_id}', [ItemController::class, 'show'])
+    Route::get('/item/{item_id}',       [ItemController::class, 'show'])
     ->name('items.show');
+
+    Route::post(
+    '/item/{item_id}/comment',
+    [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
 
 
 
