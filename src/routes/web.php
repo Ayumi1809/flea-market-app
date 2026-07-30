@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,14 @@ Route::middleware('auth')->group(function () {
     // 商品登録処理
     Route::post('/sell', [ItemController::class, 'store'])
         ->name('items.store');
+
+    Route::post(
+        '/item/{item_id}/favorite',
+        [FavoriteController::class, 'store']
+    )->name('favorites.store');
+
+    Route::delete(
+        '/item/{item_id}/favorite',
+        [FavoriteController::class, 'destroy']
+    )->name('favorites.destroy');
 });

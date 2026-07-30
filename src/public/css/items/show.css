@@ -389,6 +389,21 @@ textarea {
 
 }
 
+.favorite-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.favorite-button img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+
 /* =========================
 タブレット
 ========================= */
@@ -434,5 +449,4 @@ textarea {
         font-size: 28px;
 
     }
-
 }

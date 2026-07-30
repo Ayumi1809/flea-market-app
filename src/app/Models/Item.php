@@ -25,12 +25,6 @@ class Item extends Model
         return $this->hasOne(Purchase::class);
     }
 
-    // お気に入り
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
     // カテゴリー
     public function categories()
     {
@@ -58,6 +52,32 @@ class Item extends Model
     public function condition()
     {
         return $this->belongsTo(Condition::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function favoriteUsers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'favorites',
+            'item_id',
+            'user_id'
+        );
+    }
+
+    public function isFavoriteBy($user)
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $this->favorites()
+            ->where('user_id', $user->id)
+            ->exists();
     }
 
 }

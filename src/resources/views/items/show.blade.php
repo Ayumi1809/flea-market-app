@@ -48,11 +48,55 @@
         {{-- いいね --}}
         <div class="status-box">
 
-            <img
-                src="{{ asset('images/icons/heart.png') }}"
-                alt="いいね"
-                class="status-icon"
-            >
+            @auth
+
+                @if($item->isFavoriteBy(auth()->user()))
+
+                    <form
+                        action="{{ route('favorites.destroy', $item->id) }}"
+                        method="POST"
+                    >
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit"   class="favorite-button active">
+                            <img
+                                src="{{ asset('images/icons/heart-active.png') }}"
+                                alt="いいね済み"
+                            >
+                        </button>
+                    </form>
+
+                @else
+
+                    <form
+                        action="{{ route('favorites.store', $item->id) }}"
+                        method="POST"
+                    >
+                        @csrf
+
+                        <button type="submit"       class="favorite-button">
+                            <img
+                                src="{{ asset('images/icons/heart.png') }}"
+                                alt="いいね"
+                            >
+                        </button>
+                    </form>
+
+                @endif
+
+            @endauth
+
+            @guest
+
+                <span class="favorite-button">
+                    <img
+                        src="{{ asset('images/icons/heart.png') }}"
+                        alt="いいね"
+                    >
+                </span>
+
+            @endguest
 
             <p>{{ $item->favorites->count() }}</p>
 
