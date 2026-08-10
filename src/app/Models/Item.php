@@ -17,6 +17,7 @@ class Item extends Model
         'description',
         'price',
         'image',
+        'status',
     ];
 
     // 購入情報

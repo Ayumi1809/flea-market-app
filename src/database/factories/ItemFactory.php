@@ -26,6 +26,7 @@ class ItemFactory extends Factory
             'description' => $this->faker->sentence(),
             'price' => $this->faker->numberBetween(100, 50000),
             'image' => 'items/watch.jpg',
+            'status' => 'selling',
         ];
     }
 }

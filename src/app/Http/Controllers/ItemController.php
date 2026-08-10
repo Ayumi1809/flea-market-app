@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\Category;
+use App\Models\Condition;
+use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
 {
@@ -113,6 +116,58 @@ class ItemController extends Controller
         ])
         ->findOrFail($item_id);
 
-    return view('items.show', compact('item'));
-}
+        return view('items.show', compact('item'));
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+
+        $conditions = Condition::all();
+
+        return view(
+            'items.create',
+            compact(
+                'categories',
+                'conditions'
+            )
+        );
+    }
+
+    public function store(ExhibitionRequest $request)
+    {
+        //画像保存
+        $path = $request->file('image')
+            ->store('items','public');
+
+
+        //商品登録
+        $item = Item::create([
+
+            'user_id' => auth()->id(),
+
+            'condition_id' => $request->condition_id,
+
+            'name' => $request->name,
+
+            'brand_name' => $request->brand_name,
+
+            'description' => $request->description,
+
+            'price' => $request->price,
+
+            'image' => $path,
+
+        ]);
+
+
+        //カテゴリー登録
+        $item->categories()->attach(
+            $request->categories
+        );
+
+
+        return redirect()
+            ->route('items.index');
+    }
 }

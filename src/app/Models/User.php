@@ -63,7 +63,7 @@ class User extends Authenticatable
             'purchases',
             'user_id',
             'item_id'
-        );
+        )->withTimestamps();
     }
 
     // お気に入り情報とのリレーション
@@ -75,6 +75,11 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
 }

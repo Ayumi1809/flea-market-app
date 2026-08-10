@@ -6,17 +6,19 @@
 .mypage__profile {
     display: flex;
     align-items: center;
-    max-width: 900px;
+    max-width: 700px;
+    height: 175px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 0 20px;
 }
 
 .mypage__image {
-    width: 100px;
-    height: 100px;
+    width: 78px;
+    height: 78px;
     overflow: hidden;
     border-radius: 50%;
     background-color: #ddd;
+    flex-shrink: 0;
 }
 
 .mypage__image img {
@@ -26,29 +28,37 @@
 }
 
 .mypage__name {
-    margin-left: 40px;
+    margin: 0 0 0 45px;
     font-size: 20px;
+    font-weight: bold;
+    color: #000;
 }
 
 .mypage__edit-button {
+    display: inline-block;
     margin-left: auto;
     padding: 10px 24px;
-    border: 1px solid #ff5555;
+    border: 2px solid #ff5555;
     border-radius: 4px;
+    background-color: #fff;
     color: #ff5555;
     font-size: 14px;
+    font-weight: bold;
     text-decoration: none;
 }
 
 .mypage__tabs {
     display: flex;
+    width: 100%;
     border-bottom: 1px solid #ccc;
 }
 
 .mypage__tabs a {
     width: 180px;
-    padding: 16px;
+    padding: 13px 0;
     color: #666;
+    font-size: 14px;
+    font-weight: bold;
     text-align: center;
     text-decoration: none;
 }
@@ -61,13 +71,15 @@
 .item-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    column-gap: 28px;
+    row-gap: 38px;
     max-width: 900px;
     margin: 20px auto;
     padding: 0 20px;
 }
 
 .item-card {
+    display: block;
     color: #000;
     text-decoration: none;
 }
@@ -75,10 +87,12 @@
 .item-card__image {
     width: 100%;
     aspect-ratio: 1 / 1;
+    overflow: hidden;
     background-color: #ddd;
 }
 
 .item-card__image img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -88,10 +102,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     height: 100%;
+    color: #222;
+    font-size: 16px;
 }
 
 .item-card__name {
     margin-top: 8px;
+    color: #000;
     font-size: 14px;
+}
+
+.item-card__sold {
+    display: block;
+    margin-top: 3px;
+    color: #ff5555;
+    font-size: 12px;
+}
+
+.item-list__empty {
+    grid-column: 1 / -1;
+    margin: 30px 0;
+    text-align: center;
+    color: #666;
+}
+
+@media screen and (max-width: 768px) {
+
+    .mypage__profile {
+        height: 150px;
+        padding: 0 15px;
+    }
+
+    .mypage__image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .mypage__name {
+        margin-left: 25px;
+        font-size: 18px;
+    }
+
+    .mypage__edit-button {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+
+    .item-list {
+        grid-template-columns: repeat(2, 1fr);
+
+        column-gap: 20px;
+        row-gap: 30px;
+
+        padding: 0 15px;
+    }
 }

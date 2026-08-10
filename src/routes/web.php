@@ -1,21 +1,13 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\AddressController;
 
     // 商品一覧画面
 Route::get('/', [ItemController::class, 'index'])
@@ -64,4 +56,43 @@ Route::middleware('auth')->group(function () {
         '/item/{item_id}/favorite',
         [FavoriteController::class, 'destroy']
     )->name('favorites.destroy');
+
+    Route::get(
+        '/purchase/{item_id}',
+        [PurchaseController::class,'create']
+    )->name('purchase.create');
+
+    Route::post(
+        '/purchase/{item_id}',
+        [PurchaseController::class,'store']
+    )->name('purchase.store');
+
+    Route::get(
+        '/purchase/address/{item_id}',
+        [AddressController::class, 'edit']
+    )->name('purchase.address.edit');
+
+    Route::patch(
+        '/purchase/address/{item_id}',
+        [AddressController::class, 'update']
+    )->name('purchase.address.update');
+
+    Route::post(
+        '/purchase/{item_id}/checkout',
+        [PurchaseController::class,'checkout']
+    )
+    ->name('purchase.checkout');
+
+    Route::get(
+        '/purchase/{item_id}/success',
+        [PurchaseController::class,'success']
+    )
+    ->name('purchase.success');
+
+    Route::get(
+        '/purchase/cancel',
+        [PurchaseController::class,'cancel']
+    )
+    ->name('purchase.cancel');
+
 });

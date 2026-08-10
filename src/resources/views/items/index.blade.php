@@ -8,6 +8,12 @@
 
 @section('content')
 
+    @if(session('success'))
+        <div class="success-message">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="items">
 
         <div class="items__tabs">
@@ -33,34 +39,30 @@
 
             @forelse ($items as $item)
 
-                <div class="item-card">
+                <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="item-card">
 
-                    <a href="{{ route('items.show', ['item_id' => $item->id]) }}" class="item-card">
-
-                        <div class="item-card__image">
-                            @if ($item->image)
-                                <img
-                                    src="{{ asset('storage/' . $item->image) }}"
-                                    alt="{{ $item->name }}"
+                    <div class="item-card__image">
+                        @if ($item->image)
+                            <img
+                                src="{{ asset('storage/' . $item->image) }}"
+                                alt="{{ $item->name }}"
                                 >
-                            @else
-                                <div class="item-card__no-image">
-                                    商品画像
-                                </div>
-                            @endif
-                        </div>
-
-                        <p class="item-card__name">
-                            {{ $item->name }}
-                        </p>
-
-                        @if($item->purchase()->exists())
-                        <span class="item-card__sold">Sold</span>
+                        @else
+                            <div class="item-card__no-image">
+                                商品画像
+                            </div>
                         @endif
+                    </div>
 
-                    </a>
+                    <p class="item-card__name">
+                        {{ $item->name }}
+                    </p>
 
-                </div>
+                    @if($item->purchase)
+                        <span class="item-card__sold">Sold</span>
+                    @endif
+
+                </a>
 
             @empty
 

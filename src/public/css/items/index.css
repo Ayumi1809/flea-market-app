@@ -1,4 +1,15 @@
-.item-list {
+.success-message {
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+    border-radius: 4px;
+}
+
+/* 商品一覧全体 */
+
+.items {
 
     width: 90%;
 
@@ -6,7 +17,10 @@
 
 }
 
-.tab {
+
+/* タブ */
+
+.items__tabs {
 
     display: flex;
 
@@ -18,7 +32,8 @@
 
 }
 
-.tab a {
+
+.items__tabs a {
 
     color: #666;
 
@@ -26,15 +41,22 @@
 
     font-weight: bold;
 
+    text-decoration: none;
+
 }
 
-.tab .active {
+
+.items__tabs .active {
 
     color: red;
 
 }
 
-.item-grid {
+
+
+/* 商品一覧 */
+
+.items__content {
 
     display: grid;
 
@@ -46,13 +68,27 @@
 
 }
 
+
+
+/* 商品カード */
+
 .item-card {
+
+    position: relative;
 
     cursor: pointer;
 
+    text-decoration: none;
+
+    color: #333;
+
 }
 
-.image-box {
+
+
+/* 商品画像 */
+
+.item-card__image {
 
     position: relative;
 
@@ -68,7 +104,9 @@
 
 }
 
-.image-box img {
+
+
+.item-card__image img {
 
     width: 100%;
 
@@ -78,7 +116,31 @@
 
 }
 
-.item-card p {
+
+
+/* 画像なし */
+
+.item-card__no-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #666;
+
+}
+
+
+
+/* 商品名 */
+
+.item-card__name {
 
     margin-top: 10px;
 
@@ -86,46 +148,80 @@
 
 }
 
-.sold {
+
+
+/* Sold表示 */
+
+.item-card__sold {
 
     position: absolute;
 
     top: 10px;
 
-    left: -35px;
-
-    width: 130px;
+    left: 10px;
 
     background: red;
 
-    color: #fff;
+    color: white;
 
-    text-align: center;
+    padding: 8px 15px;
 
-    transform: rotate(-45deg);
-
-    padding: 5px 0;
+    font-size: 14px;
 
     font-weight: bold;
 
+    border-radius: 3px;
+
+    z-index: 10;
+
 }
+
+
+
+/* レスポンシブ */
 
 @media screen and (max-width:1024px) {
 
-    .items {
+
+    .items__content {
 
         grid-template-columns: repeat(3, 1fr);
 
     }
 
+
 }
+
+
 
 @media screen and (max-width:768px) {
 
-    .items {
+
+    .items__content {
 
         grid-template-columns: repeat(2, 1fr);
 
     }
+
+
+}
+
+
+@media screen and (max-width:480px) {
+
+
+    .items {
+
+        width: 95%;
+
+    }
+
+
+    .items__content {
+
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+
 
 }

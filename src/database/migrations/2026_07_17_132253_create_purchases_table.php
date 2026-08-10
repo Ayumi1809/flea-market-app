@@ -18,12 +18,12 @@ class CreatePurchasesTable extends Migration
 
             $table->foreignId('user_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
 
             $table->foreignId('item_id')
                 ->unique()
                 ->constrained()
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
 
             $table->string('postal_code');
 

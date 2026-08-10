@@ -18,9 +18,17 @@ class ProfileController extends Controller
         $page = $request->query('page', 'sell');
 
         if ($page === 'buy') {
-            $items = $user->purchasedItems;
+            $items = $user
+                ->purchasedItems()
+                ->with('purchase')
+                ->latest()
+                ->get();
+
         } else {
-            $items = $user->items;
+            $items = $user
+                ->items()
+                ->latest()
+                ->get();
         }
 
         return view('mypage.index', compact('user', 'items', 'page'));

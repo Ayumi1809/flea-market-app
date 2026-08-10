@@ -118,12 +118,22 @@
     </div>
 
         {{-- 購入ボタン --}}
+    @if(!$item->purchase)
+
         <a
-            href="#"
+            href="{{ route('purchase.create', ['item_id' => $item->id]) }}"
             class="purchase-button"
         >
             購入手続きへ
         </a>
+
+    @else
+
+        <p>
+            売り切れました
+        </p>
+
+    @endif
 
         {{-- 商品説明 --}}
         <section class="item-section">

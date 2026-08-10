@@ -67,10 +67,21 @@
                     <p class="item-card__name">
                         {{ $item->name }}
                     </p>
+
+                    @if($page === 'buy')
+
+                        <span class="item-card__sold">
+                            購入済み
+                        </span>
+
+                    @endif
+
                 </a>
 
             @empty
-                <p>商品がありません。</p>
+                <p class="item-list__empty">
+                    商品がありません。
+                </p>
             @endforelse
 
         </div>

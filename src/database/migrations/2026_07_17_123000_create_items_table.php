@@ -35,6 +35,12 @@ class CreateItemsTable extends Migration
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
 
+            $table->enum(
+                'status',
+                ['selling' , 'sold']
+            )
+            ->default('selling');
+
             $table->timestamps();
         });
     }
