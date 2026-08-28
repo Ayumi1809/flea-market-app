@@ -15,7 +15,6 @@ class PurchaseSeeder extends Seeder
     public function run()
     {
         $purchases = [
-
             [
                 'user_id' => 2,
                 'item_id' => 2,
@@ -42,7 +41,6 @@ class PurchaseSeeder extends Seeder
                 'building' => '栄ビル301',
                 'payment_method' => 'コンビニ払い',
             ],
-
         ];
 
         foreach ($purchases as $purchase) {

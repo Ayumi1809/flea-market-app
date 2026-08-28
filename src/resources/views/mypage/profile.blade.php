@@ -34,7 +34,6 @@
 
                 <label class="profile-form__image-button">
                     画像を選択する
-
                     <input
                         type="file"
                         name="profile_image"
@@ -47,20 +46,18 @@
                         {{ $message }}
                     </p>
                 @enderror
-
             </div>
 
             <div class="form-group">
                 <label for="name">
                     ユーザー名
                 </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value="{{ old('name', $user->name) }}"
-                >
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="{{ old('name', $user->name) }}"
+                    >
 
                 @error('name')
                     <p class="error-message">
@@ -73,13 +70,12 @@
                 <label for="postal_code">
                     郵便番号
                 </label>
-
-                <input
-                    type="text"
-                    id="postal_code"
-                    name="postal_code"
-                    value="{{ old('postal_code', $user->postal_code) }}"
-                >
+                    <input
+                        type="text"
+                        id="postal_code"
+                        name="postal_code"
+                        value="{{ old('postal_code', $user->postal_code) }}"
+                    >
 
                 @error('postal_code')
                     <p class="error-message">
@@ -92,13 +88,12 @@
                 <label for="address">
                     住所
                 </label>
-
-                <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value="{{ old('address', $user->address) }}"
-                >
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        value="{{ old('address', $user->address) }}"
+                    >
 
                 @error('address')
                     <p class="error-message">
@@ -111,13 +106,12 @@
                 <label for="building">
                     建物名
                 </label>
-
-                <input
-                    type="text"
-                    id="building"
-                    name="building"
-                    value="{{ old('building', $user->building) }}"
-                >
+                    <input
+                        type="text"
+                        id="building"
+                        name="building"
+                        value="{{ old('building', $user->building) }}"
+                    >
 
                 @error('building')
                     <p class="error-message">

@@ -45,11 +45,19 @@
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.mypage__edit-button:hover {
+    background-color: #ff5555;
+    color: #fff;
 }
 
 .mypage__tabs {
     display: flex;
     width: 100%;
+    padding-left: 70px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -57,7 +65,7 @@
     width: 180px;
     padding: 13px 0;
     color: #666;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -71,9 +79,9 @@
 .item-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 28px;
+    column-gap: 55px;
     row-gap: 38px;
-    max-width: 900px;
+    max-width: 1500px;
     margin: 20px auto;
     padding: 0 20px;
 }
@@ -128,11 +136,32 @@
     color: #666;
 }
 
-@media screen and (max-width: 768px) {
 
+@media screen and (max-width: 1024px) {
     .mypage__profile {
+        width: 90%;
+        max-width: 700px;
+    }
+
+    .mypage__tabs {
+        padding-left: 30px;
+    }
+
+    .item-list {
+        width: 90%;
+        max-width: 1000px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 30px;
+        row-gap: 35px;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mypage__profile {
+        width: 90%;
         height: 150px;
-        padding: 0 15px;
+        padding: 0;
     }
 
     .mypage__image {
@@ -150,12 +179,19 @@
         font-size: 12px;
     }
 
-    .item-list {
-        grid-template-columns: repeat(2, 1fr);
+    .mypage__tabs {
+        padding-left: 0;
+    }
 
+    .mypage__tabs a {
+        width: 50%;
+    }
+
+    .item-list {
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
         column-gap: 20px;
         row-gap: 30px;
-
-        padding: 0 15px;
+        padding: 0;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Purchase;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PaymentMethodTest extends TestCase
 {
@@ -23,11 +23,11 @@ class PaymentMethodTest extends TestCase
             route(
                 'purchase.checkout',
                 [
-                    'item_id'=>$item->id
+                    'item_id' => $item->id,
                 ]
             ),
             [
-                'payment_method'=>'card'
+                'payment_method' => 'カード支払い',
             ]
         );
 
@@ -35,13 +35,13 @@ class PaymentMethodTest extends TestCase
             route(
                 'purchase.success',
                 [
-                    'item_id'=>$item->id
+                    'item_id' => $item->id,
                 ]
             )
         );
 
         $this->assertEquals(
-            'card',
+            'カード支払い',
             session('payment_method')
         );
     }

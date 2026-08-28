@@ -4,16 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    /**
-     * プロフィール情報を表示
-     */
     public function index(Request $request)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $page = $request->query('page', 'sell');
 
@@ -23,7 +19,6 @@ class ProfileController extends Controller
                 ->with('purchase')
                 ->latest()
                 ->get();
-
         } else {
             $items = $user
                 ->items()
@@ -34,22 +29,16 @@ class ProfileController extends Controller
         return view('mypage.index', compact('user', 'items', 'page'));
     }
 
-    /**
-     * プロフィール編集画面を表示
-     */
     public function edit()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         return view('mypage.profile', compact('user'));
     }
 
-    /**
-     * プロフィール情報を更新
-     */
     public function update(ProfileRequest $request)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $data = $request->validated();
 

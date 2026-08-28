@@ -15,7 +15,6 @@ class FavoriteSeeder extends Seeder
     public function run()
     {
         $favorites = [
-
             [
                 'user_id' => 1,
                 'item_id' => 2,
@@ -45,7 +44,6 @@ class FavoriteSeeder extends Seeder
                 'user_id' => 3,
                 'item_id' => 10,
             ],
-
         ];
 
         foreach ($favorites as $favorite) {

@@ -20,36 +20,31 @@ class Item extends Model
         'status',
     ];
 
-    // 購入情報
     public function purchase()
     {
         return $this->hasOne(Purchase::class);
     }
 
-    // カテゴリー
     public function categories()
     {
         return $this->belongsToMany(
-        Category::class,
-        'item_category',
-        'item_id',
-        'category_id'
+            Category::class,
+            'item_category',
+            'item_id',
+            'category_id',
         );
     }
 
-    // コメント
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    // 出品者
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // 商品状態
     public function condition()
     {
         return $this->belongsTo(Condition::class);
@@ -66,7 +61,7 @@ class Item extends Model
             User::class,
             'favorites',
             'item_id',
-            'user_id'
+            'user_id',
         );
     }
 
@@ -80,5 +75,4 @@ class Item extends Model
             ->where('user_id', $user->id)
             ->exists();
     }
-
 }

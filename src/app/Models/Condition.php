@@ -13,7 +13,6 @@ class Condition extends Model
         'name',
     ];
 
-    // この状態の商品一覧
     public function items()
     {
         return $this->hasMany(Item::class);

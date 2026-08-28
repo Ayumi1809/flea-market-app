@@ -14,10 +14,7 @@ class CommentTest extends TestCase
 
     protected $seed = true;
 
-    /**
-     * @test
-     */
-    public function ログイン済みユーザーはコメントを送信できる()
+    public function test_authenticated_user_can_post_comment()
     {
         $user = User::find(1);
         $item = Item::find(1);
@@ -44,10 +41,7 @@ class CommentTest extends TestCase
         $this->assertEquals($beforeCount + 1, $afterCount);
     }
 
-    /**
-     * @test
-     */
-    public function ログイン前ユーザーはコメントを送信できない()
+    public function test_guest_cannot_post_comment()
     {
         $item = Item::find(1);
 
@@ -65,10 +59,7 @@ class CommentTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function コメント未入力ならバリデーションエラーになる()
+    public function test_comment_is_required()
     {
         $user = User::find(1);
         $item = Item::find(1);
@@ -90,10 +81,7 @@ class CommentTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
-    public function コメントが255文字を超えるとバリデーションエラーになる()
+    public function test_comment_cannot_exceed_255_characters()
     {
         $user = User::find(1);
         $item = Item::find(1);

@@ -1,13 +1,19 @@
 <header class="header">
     <div class="header__inner">
-
         <h1 class="header__logo">
             <a href="{{ route('items.index') }}">
-                <img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" alt="ロゴ">
+                <img
+                    src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}"
+                    alt="ロゴ"
+                >
             </a>
         </h1>
 
-        <form class="header__search" action="{{ route('items.index') }}" method="GET">
+        <form
+            class="header__search"
+            action="{{ route('items.index') }}"
+            method="GET"
+        >
             <input
                 type="text"
                 name="keyword"
@@ -16,12 +22,15 @@
             >
 
             @if(request('tab') === 'mylist')
-            <input type="hidden" name="tab" value="mylist">
+                <input
+                    type="hidden"
+                    name="tab"
+                    value="mylist"
+                >
             @endif
         </form>
 
         <nav class="header__nav">
-
             @guest
                 <a href="{{ route('login') }}">
                     ログイン
@@ -33,10 +42,16 @@
             @endguest
 
             @auth
-                <form method="POST" action="{{ route('logout') }}">
+                <form
+                    method="POST"
+                    action="{{ route('logout') }}"
+                >
                     @csrf
 
-                    <button type="submit">
+                    <button
+                        type="submit"
+                        class="header-nav__logout"
+                    >
                         ログアウト
                     </button>
                 </form>
@@ -46,11 +61,12 @@
                 </a>
             @endauth
 
-            <a href="#" class="header-nav__sell">
+            <a
+                href="{{ route('items.create') }}"
+                class="header-nav__sell"
+            >
                 出品
             </a>
-
         </nav>
-
     </div>
 </header>

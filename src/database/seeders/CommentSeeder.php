@@ -15,7 +15,6 @@ class CommentSeeder extends Seeder
     public function run()
     {
         $comments = [
-
             [
                 'user_id' => 2,
                 'item_id' => 1,
@@ -51,7 +50,6 @@ class CommentSeeder extends Seeder
                 'item_id' => 10,
                 'comment' => '新品未使用ですか？',
             ],
-
         ];
 
         foreach ($comments as $comment) {

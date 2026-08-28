@@ -15,21 +15,19 @@
                     >
                 @endif
             </div>
-
             <h2 class="mypage__name">
                 {{ $user->name }}
             </h2>
-
             <a
                 href="{{ route('profile.edit') }}"
                 class="mypage__edit-button"
+                id="profile-edit-button"
             >
                 プロフィールを編集
             </a>
         </div>
 
         <div class="mypage__tabs">
-
             <a
                 href="{{ route('mypage', ['page' => 'sell']) }}"
                 class="{{ $page === 'sell' ? 'active' : '' }}"
@@ -43,7 +41,6 @@
             >
                 購入した商品
             </a>
-
         </div>
 
         <div class="item-list">
@@ -51,13 +48,13 @@
                 <a
                     href="{{ route('items.show', ['item_id' => $item->id]) }}"
                     class="item-card"
-        >
+                >
                     <div class="item-card__image">
                         @if ($item->image)
                             <img
                                 src="{{ asset('storage/' . $item->image) }}"
                                 alt="{{ $item->name }}"
-                    >
+                            >
                         @else
                             <div class="item-card__no-image">
                                 商品画像
@@ -67,24 +64,17 @@
                     <p class="item-card__name">
                         {{ $item->name }}
                     </p>
-
-                    @if($page === 'buy')
-
+                    @if ($page === 'buy')
                         <span class="item-card__sold">
                             購入済み
                         </span>
-
                     @endif
-
                 </a>
-
-            @empty
-                <p class="item-list__empty">
-                    商品がありません。
-                </p>
+                @empty
+                    <p class="item-list__empty">
+                        商品がありません。
+                    </p>
             @endforelse
-
         </div>
-
     </div>
 @endsection

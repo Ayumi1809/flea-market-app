@@ -14,51 +14,36 @@ class LoginTest extends TestCase
     public function test_email_is_required()
     {
         $response = $this->post('/login', [
-
             'email' => '',
-
             'password' => 'password',
-
         ]);
 
         $response->assertSessionHasErrors([
-
             'email',
-
         ]);
     }
 
     public function test_password_is_required()
     {
         $response = $this->post('/login', [
-
             'email' => 'test@example.com',
-
             'password' => '',
-
         ]);
 
         $response->assertSessionHasErrors([
-
             'password',
-
         ]);
     }
 
     public function test_login_fails_with_invalid_credentials()
     {
         $response = $this->post('/login', [
-
-        'email' => 'test@example.com',
-
-        'password' => 'password',
-
-    ]);
+            'email' => 'test@example.com',
+            'password' => 'password',
+        ]);
 
         $response->assertSessionHasErrors([
-
             'email',
-
         ]);
 
         $this->assertGuest();
@@ -67,21 +52,14 @@ class LoginTest extends TestCase
     public function test_user_can_login()
     {
         $user = User::factory()->create([
-
             'name' => 'テスト',
-
             'email' => 'test@example.com',
-
             'password' => Hash::make('password'),
-
         ]);
 
         $response = $this->post('/login', [
-
             'email' => 'test@example.com',
-
             'password' => 'password',
-
         ]);
 
         $this->assertAuthenticated();

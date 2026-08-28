@@ -13,16 +13,13 @@ class Category extends Model
         'name',
     ];
 
-    /**
-     * このカテゴリに属する商品
-     */
     public function items()
     {
         return $this->belongsToMany(
             Item::class,
             'item_category',
             'category_id',
-            'item_id'
+            'item_id',
         );
     }
 }

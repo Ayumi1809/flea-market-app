@@ -3,10 +3,9 @@
 namespace Tests\Feature\Item;
 
 use App\Models\Item;
-use App\Models\User;
 use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ItemListTest extends TestCase
@@ -32,7 +31,9 @@ class ItemListTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertSee('腕時計');
+
         $response->assertSee('HDD');
+
         $response->assertSee('ノートPC');
     }
 

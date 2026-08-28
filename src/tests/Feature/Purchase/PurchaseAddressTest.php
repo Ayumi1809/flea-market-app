@@ -2,17 +2,15 @@
 
 namespace Tests\Feature\Purchase;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PurchaseAddressTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * 配送先変更画面が表示される
-     */
+
     public function test_purchase_address_edit_page_display()
     {
         $user = User::factory()->create();
@@ -25,7 +23,7 @@ class PurchaseAddressTest extends TestCase
             route(
                 'purchase.address.edit',
                 [
-                    'item_id'=>$item->id
+                    'item_id'=>$item->id,
                 ]
             )
         );
@@ -37,9 +35,6 @@ class PurchaseAddressTest extends TestCase
         );
     }
 
-    /**
-     * 配送先変更後、購入画面へ戻る
-     */
     public function test_purchase_address_update()
     {
         $user = User::factory()->create();
@@ -52,7 +47,7 @@ class PurchaseAddressTest extends TestCase
             route(
                 'purchase.address.update',
                 [
-                    'item_id'=>$item->id
+                    'item_id'=>$item->id,
                 ]
             ),
             [
@@ -66,7 +61,7 @@ class PurchaseAddressTest extends TestCase
             route(
                 'purchase.create',
                 [
-                    'item_id'=>$item->id
+                    'item_id'=>$item->id,
                 ]
             )
         );
@@ -74,6 +69,16 @@ class PurchaseAddressTest extends TestCase
         $this->assertEquals(
             '111-2222',
             session('purchase_address.postal_code')
+        );
+
+        $this->assertEquals(
+            '東京都新宿区',
+            session('purchase_address.address')
+        );
+
+        $this->assertEquals(
+            'テストビル101',
+            session('purchase_address.building')
         );
     }
 }

@@ -1,426 +1,366 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/items/sell.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/items/create.css') }}">
 @endsection
 
 @section('content')
+    <div class="sell-container">
+        <h1 class="page-title">
+            商品の出品
+        </h1>
 
-<div class="sell-container">
+        <form
+            action="{{ route('items.store') }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+            @csrf
 
-    <h1 class="page-title">
-        商品の出品
-    </h1>
-
-    <form
-        action="{{ route('items.store') }}"
-        method="POST"
-        enctype="multipart/form-data"
-    >
-
-        @csrf
-
-        {{-- 商品画像 --}}
-        <div class="form-group">
-
-            <label class="form-label required">
-                商品画像
-            </label>
-
-            <div class="image-upload">
-
+            <div class="form-group">
                 <label
                     for="image"
-                    class="image-button"
+                    class="form-label required"
                 >
-                    画像を選択する
+                    商品画像
                 </label>
 
-                <input
-                    type="file"
-                    name="image"
-                    id="image"
-                    class="image-input"
-                >
+                <div class="image-upload">
+                    <label
+                        for="image"
+                        class="image-button"
+                    >
+                        画像を選択する
+                    </label>
 
-                <p
-                    id="file-name"
-                    class="file-name"
-                >
-                </p>
+                    <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        class="image-input"
+                    >
 
-            </div>
-
-            @error('image')
-
-                <p class="error">
-                    {{ $message }}
-                </p>
-
-            @enderror
-
-        </div>
-
-    {{-- 商品詳細 --}}
-    <section class="form-section">
-
-        <h2 class="sub-title">
-            商品の詳細
-        </h2>
-
-
-        {{-- カテゴリー --}}
-        <div class="form-group">
-            <label class="form-label required">
-                カテゴリー
-            </label>
-
-                <div class="category-list">
-
-                    @foreach($categories as $category)
-
-                        <label  class="category-tag">
-
-                            <input
-                                type="checkbox"
-                                name="categories[]"
-                                value="{{ $category->id }}"
-                                hidden
-                                {{
-                                    in_array(
-                                        $category->id,
-                                        old('categories', [])
-                                    )
-                                    ? 'checked'
-                                    : ''
-                                }}
-                            >
-
-                            <span>
-
-                                {{ $category->name }}
-
-                            </span>
-
-                        </label>
-
-                    @endforeach
-
+                    <p
+                        id="file-name"
+                        class="file-name"
+                    ></p>
                 </div>
 
-                @error('categories')
-
+                @error('image')
                     <p class="error">
                         {{ $message }}
                     </p>
-
                 @enderror
-
-        </div>
-
-        {{-- 商品状態 --}}
-        <div class="form-group">
-
-            <label class="form-label required">
-                商品の状態
-            </label>
-
-            <div
-                class="condition-select"
-                id="condition-select"
-            >
-
-                <input
-                    type="hidden"
-                    name="condition_id"
-                    id="condition_id"
-                    value="{{ old('condition_id') }}"
-                >
-
-                <button
-                    type="button"
-                    class="condition-selected"
-                    id="condition-selected"
-                >
-
-                    <span id="condition-selected-text">
-                        選択してください
-                    </span>
-
-                    <span class="condition-arrow">
-                        ▼
-                    </span>
-                </button>
-
-                <div
-                    class="condition-options"
-                    id="condition-options"
-                >
-
-                    @foreach($conditions as $condition)
-
-                        <div
-                            class="condition-option
-                            {{
-                                old('condition_id') == $condition->id
-                                ? 'selected'
-                                : ''
-                            }}"
-                            data-value="{{ $condition->id }}"
-                        >
-
-                            <span class="condition-check">
-                                ✓
-                            </span>
-
-                            <span>
-                                {{ $condition->name }}
-                            </span>
-
-                        </div>
-
-                    @endforeach
-
-                </div>
             </div>
 
-            @error('condition_id')
+            <section class="form-section">
+                <h2 class="sub-title">
+                    商品の詳細
+                </h2>
 
-                <p class="error">
-                    {{ $message }}
-                </p>
+                <div class="form-group">
+                    <label class="form-label required">
+                        カテゴリー
+                    </label>
 
-            @enderror
+                    <div class="category-list">
+                        @foreach($categories as $category)
+                            <label
+                                class="category-tag"
+                            >
 
-        </div>
+                                <input
+                                    type="checkbox"
+                                    name="categories[]"
+                                    value="{{ $category->id }}"
+                                    hidden
+                                    {{
+                                        in_array(
+                                            $category->id,
+                                            old('categories', [])
+                                        )
+                                        ? 'checked'
+                                        : ''
+                                    }}
+                                >
 
-    </section>
+                                <span>
+                                    {{ $category->name }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
 
-        {{-- 商品名と説明 --}}
-        <section class="form-section">
-
-            <h2 class="sub-title">
-                商品名と説明
-            </h2>
-
-            {{-- 商品名 --}}
-            <div class="form-group">
-
-                <label class="form-label required">
-                    商品名
-                </label>
-
-
-                <input
-                    type="text"
-                    name="name"
-                    class="input"
-                    value="{{ old('name') }}"
-                >
-
-
-                    @error('name')
-
+                    @error('categories')
                         <p class="error">
                             {{ $message }}
                         </p>
-
                     @enderror
+                </div>
 
-            </div>
+                <div class="form-group">
+                    <label class="form-label required">
+                        商品の状態
+                    </label>
 
-            {{-- ブランド名 --}}
-            <div class="form-group">
+                    <div
+                        class="condition-select"
+                        id="condition-select"
+                    >
 
-                <label class="form-label">
-                    ブランド名
-                </label>
+                        <input
+                            type="hidden"
+                            name="condition_id"
+                            id="condition_id"
+                            value="{{ old('condition_id') }}"
+                        >
 
+                        <button
+                            type="button"
+                            class="condition-selected"
+                            id="condition-selected"
+                        >
+
+                            <span
+                                id="condition-selected-text"
+                            >
+                                選択してください
+                            </span>
+
+                            <span
+                                class="condition-arrow"
+                            >
+                                ▼
+                            </span>
+                        </button>
+
+                        <div
+                            class="condition-options"
+                            id="condition-options"
+                        >
+
+                            @foreach($conditions as $condition)
+                                <div
+                                    class="condition-option
+                                    {{
+                                        old('condition_id') == $condition->id
+                                        ? 'selected'
+                                        : ''
+                                    }}"
+                                    data-value="{{ $condition->id }}"
+                                >
+
+                                    <span
+                                        class="condition-check"
+                                    >
+                                        ✓
+                                    </span>
+
+                                    <span>
+                                        {{ $condition->name }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    @error('condition_id')
+                        <p class="error">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2 class="sub-title">
+                    商品名と説明
+                </h2>
+
+                <div class="form-group">
+                    <label
+                        for="name"
+                        class="form-label required"
+                    >
+                        商品名
+                    </label>
 
                     <input
                         type="text"
+                        id="name"
+                        name="name"
+                        class="input"
+                        value="{{ old('name') }}"
+                    >
+
+                    @error('name')
+                        <p class="error">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label
+                        for="brand_name"
+                        class="form-label"
+                    >
+                        ブランド名
+                    </label>
+
+                    <input
+                        type="text"
+                        id="brand_name"
                         name="brand_name"
                         class="input"
                         value="{{ old('brand_name') }}"
                     >
+                </div>
 
-            </div>
-
-            {{-- 商品説明 --}}
-            <div class="form-group">
-
-                <label class="form-label required">
-                    商品説明
-                </label>
-
+                <div class="form-group">
+                    <label
+                        for="description"
+                        class="form-label required"
+                    >
+                        商品説明
+                    </label>
 
                     <textarea
+                        id="description"
                         name="description"
                         class="textarea"
                     >{{ old('description') }}</textarea>
 
-
-                        @error('description')
-
-                            <p class="error">
-                                {{ $message }}
-                            </p>
-
-                        @enderror
-
-            </div>
-
-            {{-- 販売価格 --}}
-            <div class="form-group">
-
-                <label class="form-label required">
-                    販売価格
-                </label>
-
-                <div class="price-area">
-
-                    <span>
-                        ¥
-                    </span>
-
-
-                    <input
-                        type="number"
-                        name="price"
-                        class="price-input"
-                        value="{{ old('price') }}"
-                    >
+                    @error('description')
+                        <p class="error">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
-                @error('price')
+                <div class="form-group">
+                    <label
+                        for="price"
+                        class="form-label required"
+                    >
+                        販売価格
+                    </label>
 
-                    <p class="error">
-                        {{ $message }}
-                    </p>
+                    <div class="price-area">
+                        <span>
+                            ¥
+                        </span>
 
-                @enderror
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            class="price-input"
+                            value="{{ old('price') }}"
+                        >
+                    </div>
 
+                    @error('price')
+                        <p class="error">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </section>
+
+            <div class="button-area">
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    出品する
+                </button>
             </div>
+        </form>
+    </div>
 
-        </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const imageInput =
+                document.getElementById('image');
 
+            const fileName =
+                document.getElementById('file-name');
 
-        {{-- 出品ボタン --}}
-        <div class="button-area">
+            const conditionSelect =
+                document.getElementById('condition-select');
 
-            <button
-                type="submit"
-                class="submit-button"
-            >
+            const selectedButton =
+                document.getElementById('condition-selected');
 
-                出品する
+            const selectedText =
+                document.getElementById('condition-selected-text');
 
-            </button>
+            const options =
+                document.getElementById('condition-options');
 
-        </div>
+            const hiddenInput =
+                document.getElementById('condition_id');
 
-    </form>
+            imageInput.addEventListener('change', function () {
+                if (this.files.length > 0) {
+                    fileName.textContent =
+                        this.files[0].name;
+                }
+            });
 
-</div>
+            const selectedOption =
+                options.querySelector('.condition-option.selected');
 
-
-
-<script>
-
-const imageInput = document.getElementById('image');
-
-const fileName = document.getElementById('file-name');
-
-
-imageInput.addEventListener(
-    'change',
-    function(){
-
-        if(this.files.length > 0){
-
-            fileName.textContent =
-                this.files[0].name;
-
-        }
-
-    }
-);
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    const conditionSelect =
-        document.getElementById('condition-select');
-
-    const selectedButton =
-        document.getElementById('condition-selected');
-
-    const selectedText =
-        document.getElementById('condition-selected-text');
-
-    const options =
-        document.getElementById('condition-options');
-
-    const hiddenInput =
-        document.getElementById('condition_id');
-
-
-        const selectedOption =
-        options.querySelector('.condition-option.selected');
-
-        if (selectedOption) {
-            selectedText.textContent =
-                selectedOption.querySelector('span:last-child').textContent.trim();
-        }
-
-        selectedButton.addEventListener('click', function () {
-            conditionSelect.classList.toggle('open');
-        });
-
-        options.addEventListener('click', function (event) {
-
-            const option =
-                event.target.closest('.condition-option');
-
-            if (!option) {
-                return;
+            if (selectedOption) {
+                selectedText.textContent =
+                    selectedOption
+                        .querySelector('span:last-child')
+                        .textContent
+                        .trim();
             }
 
-            const value =
-                option.dataset.value;
+            selectedButton.addEventListener('click', function () {
+                conditionSelect.classList.toggle('open');
+            });
 
-            const text =
-                option.querySelector('span:last-child')
-                    .textContent
-                    .trim();
+            options.addEventListener('click', function (event) {
+                const option =
+                    event.target.closest('.condition-option');
 
-            hiddenInput.value = value;
+                if (!option) {
+                    return;
+                }
 
-            selectedText.textContent = text;
+                const value =
+                    option.dataset.value;
 
-            options
-                .querySelectorAll('.condition-option')
-                .forEach(function (item) {
-                    item.classList.remove('selected');
-                });
+                const text =
+                    option
+                        .querySelector('span:last-child')
+                        .textContent
+                        .trim();
 
-            option.classList.add('selected');
+                hiddenInput.value = value;
 
-            onditionSelect.classList.remove('open');
+                selectedText.textContent = text;
 
-    });
+                options
+                    .querySelectorAll('.condition-option')
+                    .forEach(function (item) {
+                        item.classList.remove('selected');
+                    });
 
+                option.classList.add('selected');
 
-    document.addEventListener('click', function (event) {
+                conditionSelect.classList.remove('open');
+            });
 
-        if (!conditionSelect.contains(event.target)) {
-
-            conditionSelect.classList.remove('open');
-
-        }
-
-    });
-
-});
-
-</script>
+            document.addEventListener('click', function (event) {
+                if (!conditionSelect.contains(event.target)) {
+                    conditionSelect.classList.remove('open');
+                }
+            });
+        });
+    </script>
 @endsection
