@@ -1,0 +1,364 @@
+.purchase__container {
+    width: 988px;
+    margin: 68px auto 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 75px;
+}
+
+.purchase__left {
+    width: 590px;
+    flex-shrink: 0;
+}
+
+.purchase-item {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    padding-bottom: 45px;
+    border-bottom: 1px solid #999;
+}
+
+.purchase-item__image {
+    width: 116px;
+    height: 116px;
+    flex-shrink: 0;
+}
+
+.purchase-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.purchase-item__info {
+    padding-top: 5px;
+}
+
+.purchase-item__info h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.purchase-item__info .price {
+    margin: 0;
+    font-size: 20px;
+}
+
+.purchase__left hr {
+    border: none;
+    border-top: 1px solid #999;
+    margin: 32px 0 20px;
+}
+
+.purchase-section {
+    padding: 22px 25px 30px;
+    border-bottom: 1px solid #999;
+}
+
+.purchase-section__title {
+    margin: 0 0 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.payment-section {
+    padding-top: 22px;
+    padding-bottom: 30px;
+}
+
+.payment-dropdown {
+    position: relative;
+    width: 195px;
+    margin-left: 45px;
+}
+
+.payment-dropdown__button {
+    position: relative;
+    width: 100%;
+    height: 42px;
+    padding: 0 35px 0 12px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #222;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.payment-dropdown__button:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.payment-dropdown__arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #555;
+    pointer-events: none;
+    transition: transform 0.2s;
+}
+
+.payment-dropdown.is-open .payment-dropdown__arrow {
+    transform:
+        translateY(-50%) rotate(180deg);
+}
+
+.payment-dropdown__menu {
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    display: none;
+    padding: 3px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background-color: #666;
+    box-sizing: border-box;
+}
+
+.payment-dropdown.is-open .payment-dropdown__menu {
+    display: block;
+}
+
+.payment-dropdown__option {
+    width: 100%;
+    height: 32px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.payment-dropdown__option:hover {
+    background-color: #4d4d4d;
+}
+
+.payment-dropdown__option.is-selected {
+    background-color: #4c9bea;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.payment-dropdown__option.is-selected::before {
+    content: '✓';
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.error {
+    margin-top: 10px;
+    margin-left: 45px;
+    color: #ff0000;
+    font-size: 13px;
+}
+
+.purchase-address-section {
+    padding-top: 30px;
+}
+
+.purchase-address__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.purchase-address__header h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.purchase-address__header a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.purchase-address__header a:hover {
+    text-decoration: underline;
+}
+
+.purchase-address {
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.purchase-address p {
+    margin: 5px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.purchase__right {
+    width: 323px;
+    flex-shrink: 0;
+}
+
+.purchase-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+
+.purchase-table tr {
+    height: 75px;
+}
+
+.purchase-table tr + tr {
+    border-top: 1px solid #777;
+}
+
+.purchase-table th,
+.purchase-table td {
+    padding: 0 30px;
+    font-size: 14px;
+}
+
+.purchase-table th {
+    text-align: left;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.purchase-table td {
+    text-align: right;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
+.purchase-button {
+    width: 100%;
+    height: 40px;
+    margin-top: 42px;
+    border: none;
+    border-radius: 4px;
+    background: #ff5555;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.purchase-button:hover {
+    opacity: 0.85;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .purchase__container {
+        width: 90%;
+        gap: 40px;
+    }
+
+    .purchase__left {
+        width: calc(60% - 20px);
+    }
+
+    .purchase__right {
+        width: calc(40% - 20px);
+    }
+
+    .purchase-item {
+        gap: 20px;
+    }
+
+    .purchase-item__image {
+        width: 110px;
+        height: 110px;
+    }
+
+    .purchase-item__info h2 {
+        font-size: 19px;
+    }
+
+    .purchase-table th,
+    .purchase-table td {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .purchase__container {
+        width: 90%;
+        margin: 40px auto;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .purchase__left {
+        width: 100%;
+    }
+
+    .purchase__right {
+        width: 100%;
+    }
+
+    .purchase-item {
+        gap: 20px;
+        padding-bottom: 35px;
+    }
+
+    .purchase-item__image {
+        width: 110px;
+        height: 110px;
+    }
+
+    .purchase-item__info h2 {
+        font-size: 18px;
+    }
+
+    .purchase-item__info .price {
+        font-size: 18px;
+    }
+
+    .payment-dropdown {
+        width: 195px;
+        margin-left: 20px;
+    }
+
+    .error {
+        margin-left: 20px;
+    }
+
+    .purchase-address {
+        margin-left: 20px;
+    }
+
+    .purchase-table tr {
+        height: 65px;
+    }
+
+    .purchase-table th,
+    .purchase-table td {
+        padding: 0 15px;
+    }
+
+    .purchase-button {
+        height: 48px;
+        margin-top: 30px;
+    }
+}

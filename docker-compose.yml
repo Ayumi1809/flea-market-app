@@ -15,6 +15,7 @@ services:
     build: ./docker/php
     volumes:
       - ./src:/var/www/
+      - laravel_bootstrap_cache:/var/www/bootstrap/cache
 
   mysql:
     image: mysql:8.0.26
@@ -42,3 +43,4 @@ services:
 
 volumes:
   mysql_data:
+  laravel_bootstrap_cache:
