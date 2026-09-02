@@ -24,15 +24,17 @@ class StripeCheckoutTest extends TestCase
 
     public function test_stripe_checkout_redirect_success()
     {
-        $user = User::factory()->create();
+        $seller = User::factory()->create();
+
+        $buyer = User::factory()->create();
 
         $item = Item::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $seller->id,
             'price' => 1000,
             'status' => 'selling',
         ]);
 
-        $this->actingAs($user);
+        $this->actingAs($buyer);
 
         Stripe::setApiKey('sk_test_mock');
 
@@ -51,10 +53,7 @@ class StripeCheckoutTest extends TestCase
                 $maxNetworkRetries
             ) {
                 return $method === 'post'
-                    && str_contains(
-                        $url,
-                        '/v1/checkout/sessions'
-                    )
+                    && str_contains($url, '/v1/checkout/sessions')
                     && $params['payment_method_types'][0] === 'card';
             })
             ->andReturn([
@@ -70,38 +69,32 @@ class StripeCheckoutTest extends TestCase
         ApiRequestor::setHttpClient($mockHttpClient);
 
         $response = $this->post(
-            route(
-                'purchase.checkout',
-                [
-                    'item_id' => $item->id,
-                ]
-            ),
+            route('purchase.checkout', [
+                'item_id' => $item->id,
+            ]),
             [
                 'payment_method' => 'カード支払い',
             ]
         );
 
-        $response->assertRedirect(
-            'http://stripe.test/checkout'
-        );
+        $response->assertRedirect('http://stripe.test/checkout');
 
-        $this->assertEquals(
-            'カード支払い',
-            session('payment_method')
-        );
+        $this->assertEquals('カード支払い', session('payment_method'));
     }
 
     public function test_stripe_checkout_with_konbini()
     {
-        $user = User::factory()->create();
+        $seller = User::factory()->create();
+
+        $buyer = User::factory()->create();
 
         $item = Item::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $seller->id,
             'price' => 1000,
             'status' => 'selling',
         ]);
 
-        $this->actingAs($user);
+        $this->actingAs($buyer);
 
         Stripe::setApiKey('sk_test_mock');
 
@@ -120,10 +113,7 @@ class StripeCheckoutTest extends TestCase
                 $maxNetworkRetries
             ) {
                 return $method === 'post'
-                    && str_contains(
-                        $url,
-                        '/v1/checkout/sessions'
-                    )
+                    && str_contains($url, '/v1/checkout/sessions')
                     && $params['payment_method_types'][0] === 'konbini';
             })
             ->andReturn([
@@ -139,24 +129,16 @@ class StripeCheckoutTest extends TestCase
         ApiRequestor::setHttpClient($mockHttpClient);
 
         $response = $this->post(
-            route(
-                'purchase.checkout',
-                [
-                    'item_id' => $item->id,
-                ]
-            ),
+            route('purchase.checkout', [
+                'item_id' => $item->id,
+            ]),
             [
                 'payment_method' => 'コンビニ払い',
             ]
         );
 
-        $response->assertRedirect(
-            'http://stripe.test/checkout'
-        );
+        $response->assertRedirect('http://stripe.test/checkout');
 
-        $this->assertEquals(
-            'コンビニ払い',
-            session('payment_method')
-        );
+        $this->assertEquals('コンビニ払い', session('payment_method'));
     }
 }

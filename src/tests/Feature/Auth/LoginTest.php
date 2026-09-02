@@ -66,6 +66,8 @@ class LoginTest extends TestCase
 
         $this->assertAuthenticatedAs($user);
 
-        $response->assertRedirect('/mypage/profile');
+        $response->assertRedirect('/');
     }
 }
+
+

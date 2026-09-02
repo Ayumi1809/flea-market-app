@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Favorite;
 
 use App\Models\Favorite;
 use App\Models\Item;
@@ -17,36 +17,25 @@ class FavoriteTest extends TestCase
         $user = User::factory()->create();
 
         $item = Item::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $this->actingAs($user);
 
-        $response = $this->post(
-            route(
-                'favorites.store',
-                [
-                    'item_id' => $item->id
-                ]
-            )
-        );
+        $response = $this->post(route('favorites.store', [
+            'item_id' => $item->id,
+        ]));
 
-        $response->assertStatus(302);
+        $response->assertRedirect();
 
-        $this->assertDatabaseHas(
-            'favorites',
-            [
-                'user_id' => $user->id,
-                'item_id' => $item->id
-            ]
-        );
+        $this->assertDatabaseHas('favorites', [
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+        ]);
 
         $this->assertEquals(
             1,
-            Favorite::where(
-                'item_id',
-                $item->id
-            )->count()
+            Favorite::where('item_id', $item->id)->count()
         );
     }
 
@@ -63,24 +52,15 @@ class FavoriteTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get(
-            route(
-                'items.show',
-                [
-                    'item_id' => $item->id,
-                ]
-            )
-        );
+        $response = $this->get(route('items.show', [
+            'item_id' => $item->id,
+        ]));
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
-        $response->assertSee(
-            'heart-active.png'
-        );
+        $response->assertSee('heart-active.png');
 
-        $response->assertSee(
-            'favorite-button active'
-        );
+        $response->assertSee('favorite-button active');
     }
 
     public function test_user_can_remove_favorite()
@@ -96,31 +76,20 @@ class FavoriteTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->delete(
-            route(
-                'favorites.destroy',
-                [
-                    'item_id' => $item->id,
-                ]
-            )
-        );
+        $response = $this->delete(route('favorites.destroy', [
+            'item_id' => $item->id,
+        ]));
 
-        $response->assertStatus(302);
+        $response->assertRedirect();
 
-        $this->assertDatabaseMissing(
-            'favorites',
-            [
-                'user_id' => $user->id,
-                'item_id' => $item->id,
-            ]
-        );
+        $this->assertDatabaseMissing('favorites', [
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+        ]);
 
         $this->assertEquals(
             0,
-            Favorite::where(
-                'item_id',
-                $item->id
-            )->count()
+            Favorite::where('item_id', $item->id)->count()
         );
     }
 }

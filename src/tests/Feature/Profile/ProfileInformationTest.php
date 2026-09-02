@@ -20,7 +20,7 @@ class ProfileInformationTest extends TestCase
             'profile_image' => 'profile.jpg',
         ]);
 
-        $condition = Condition::factory()->create();
+        $condition = Condition::first();
 
         Item::factory()->create([
             'user_id' => $user->id,
@@ -53,11 +53,9 @@ class ProfileInformationTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get(
-                route('mypage')
-            );
+            ->get(route('mypage'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $response->assertSee('テストユーザー');
 

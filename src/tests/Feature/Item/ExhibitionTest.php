@@ -36,7 +36,7 @@ class ExhibitionTest extends TestCase
 
         $response = $this->get(route('items.create'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $image = UploadedFile::fake()->image('test-item.jpeg');
 
@@ -52,9 +52,7 @@ class ExhibitionTest extends TestCase
             'price' => 5000,
         ]);
 
-        $response->assertRedirect(
-            route('items.index')
-        );
+        $response->assertRedirect(route('items.index'));
 
         $this->assertDatabaseHas('items', [
             'user_id' => $user->id,
@@ -74,8 +72,6 @@ class ExhibitionTest extends TestCase
 
         $this->assertNotNull($item->image);
 
-        Storage::disk('public')->assertExists(
-            $item->image
-        );
+        Storage::disk('public')->assertExists($item->image);
     }
 }

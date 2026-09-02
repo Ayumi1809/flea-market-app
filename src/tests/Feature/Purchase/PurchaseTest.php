@@ -38,29 +38,21 @@ class PurchaseTest extends TestCase
         ]);
 
         $response = $this->get(
-            route(
-                'purchase.success',
-                [
-                    'item_id' => $item->id,
-                ]
-            )
-        );
-
-        $response->assertRedirect(
-            route('items.index')
-        );
-
-        $this->assertDatabaseHas(
-            'purchases',
-            [
-                'user_id' => $buyer->id,
+            route('purchase.success', [
                 'item_id' => $item->id,
-                'payment_method' => 'カード支払い',
-                'postal_code' => '123-4567',
-                'address' => '東京都渋谷区',
-                'building' => 'テストビル101',
-            ]
+            ])
         );
+
+        $response->assertRedirect(route('items.index'));
+
+        $this->assertDatabaseHas('purchases', [
+            'user_id' => $buyer->id,
+            'item_id' => $item->id,
+            'payment_method' => 'カード支払い',
+            'postal_code' => '123-4567',
+            'address' => '東京都渋谷区',
+            'building' => 'テストビル101',
+        ]);
     }
 
     public function test_item_becomes_sold_after_purchase()
@@ -90,21 +82,15 @@ class PurchaseTest extends TestCase
         ]);
 
         $this->get(
-            route(
-                'purchase.success',
-                [
-                    'item_id' => $item->id,
-                ]
-            )
+            route('purchase.success', [
+                'item_id' => $item->id,
+            ])
         );
 
-        $this->assertDatabaseHas(
-            'items',
-            [
-                'id' => $item->id,
-                'status' => 'sold',
-            ]
-        );
+        $this->assertDatabaseHas('items', [
+            'id' => $item->id,
+            'status' => 'sold',
+        ]);
     }
 
     public function test_purchased_item_is_displayed_on_profile()
@@ -132,28 +118,18 @@ class PurchaseTest extends TestCase
         ]);
 
         $this->get(
-            route(
-                'purchase.success',
-                [
-                    'item_id' => $item->id,
-                ]
-            )
+            route('purchase.success', [
+                'item_id' => $item->id,
+            ])
         );
 
         $response = $this->get(
-            route(
-                'mypage',
-                [
-                    'page' => 'buy',
-                ]
-            )
+            route('mypage', ['page' => 'buy'])
         );
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
-        $response->assertSee(
-            $item->name
-        );
+        $response->assertSee($item->name);
     }
 
     public function test_payment_success_displays_purchase_message()
@@ -185,19 +161,14 @@ class PurchaseTest extends TestCase
         $response = $this
             ->followingRedirects()
             ->get(
-                route(
-                    'purchase.success',
-                    [
-                        'item_id' => $item->id,
-                    ]
-                )
+                route('purchase.success', [
+                    'item_id' => $item->id,
+                ])
             );
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
-        $response->assertSee(
-            '商品を購入しました。'
-        );
+        $response->assertSee('商品を購入しました。');
     }
 
     public function test_purchase_success_requires_payment_method()
@@ -226,21 +197,53 @@ class PurchaseTest extends TestCase
         ]);
 
         $response = $this->get(
-            route(
-                'purchase.success',
-                [
-                    'item_id' => $item->id,
-                ]
-            )
+            route('purchase.success', [
+                'item_id' => $item->id,
+            ])
         );
 
         $response->assertStatus(400);
 
-        $this->assertDatabaseMissing(
-            'purchases',
-            [
+        $this->assertDatabaseMissing('purchases', [
+            'item_id' => $item->id,
+        ]);
+    }
+
+    public function test_user_cannot_purchase_own_item()
+    {
+        $user = User::factory()->create([
+            'postal_code' => '123-4567',
+            'address' => '東京都渋谷区',
+            'building' => 'テストビル101',
+        ]);
+
+        $item = Item::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'selling',
+        ]);
+
+        $this->actingAs($user);
+
+        session([
+            'payment_method' => 'カード支払い',
+            'purchase_address' => [
+                'postal_code' => '123-4567',
+                'address' => '東京都渋谷区',
+                'building' => 'テストビル101',
+            ],
+        ]);
+
+        $response = $this->get(
+            route('purchase.success', [
                 'item_id' => $item->id,
-            ]
+            ])
         );
+
+        $response->assertStatus(403);
+
+        $this->assertDatabaseMissing('purchases', [
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+        ]);
     }
 }

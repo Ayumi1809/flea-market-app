@@ -12,9 +12,7 @@ class ProfileAccessTest extends TestCase
 
     public function test_guest_cannot_access_profile_edit_page()
     {
-        $response = $this->get(
-            route('profile.edit')
-        );
+        $response = $this->get(route('profile.edit'));
 
         $response->assertRedirect('/login');
     }
@@ -25,18 +23,14 @@ class ProfileAccessTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get(
-                route('profile.edit')
-            );
+            ->get(route('profile.edit'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_guest_cannot_access_mypage()
     {
-        $response = $this->get(
-            route('mypage')
-        );
+        $response = $this->get(route('mypage'));
 
         $response->assertRedirect('/login');
     }
@@ -47,10 +41,8 @@ class ProfileAccessTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get(
-                route('mypage')
-            );
+            ->get(route('mypage'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 }

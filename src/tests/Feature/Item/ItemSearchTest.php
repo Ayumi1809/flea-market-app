@@ -30,7 +30,7 @@ class ItemSearchTest extends TestCase
             ])
         );
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $response->assertSee('ノートPC');
 

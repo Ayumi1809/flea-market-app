@@ -22,11 +22,9 @@ class ProfileEditTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get(
-                route('profile.edit')
-            );
+            ->get(route('profile.edit'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $response->assertSee('山田太郎');
 

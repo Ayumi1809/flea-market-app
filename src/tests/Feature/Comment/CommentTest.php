@@ -12,8 +12,6 @@ class CommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $seed = true;
-
     public function test_authenticated_user_can_post_comment()
     {
         $user = User::find(1);
@@ -76,9 +74,7 @@ class CommentTest extends TestCase
 
         $response
             ->assertRedirect(route('items.show', ['item_id' => $item->id]))
-            ->assertSessionHasErrors([
-                'comment',
-            ]);
+            ->assertSessionHasErrors(['comment']);
     }
 
     public function test_comment_cannot_exceed_255_characters()
@@ -98,8 +94,6 @@ class CommentTest extends TestCase
 
         $response
             ->assertRedirect(route('items.show', ['item_id' => $item->id]))
-            ->assertSessionHasErrors([
-                'comment',
-            ]);
+            ->assertSessionHasErrors(['comment']);
     }
 }

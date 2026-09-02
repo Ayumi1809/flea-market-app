@@ -20,19 +20,14 @@ class PurchaseAddressTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->get(
-            route(
-                'purchase.address.edit',
-                [
-                    'item_id'=>$item->id,
-                ]
-            )
+            route('purchase.address.edit', [
+                'item_id' => $item->id,
+            ])
         );
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
-        $response->assertSee(
-            '住所の変更'
-        );
+        $response->assertSee('住所の変更');
     }
 
     public function test_purchase_address_update()
@@ -44,26 +39,20 @@ class PurchaseAddressTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->patch(
-            route(
-                'purchase.address.update',
-                [
-                    'item_id'=>$item->id,
-                ]
-            ),
+            route('purchase.address.update', [
+                'item_id' => $item->id,
+            ]),
             [
-                'postal_code'=>'111-2222',
-                'address'=>'東京都新宿区',
-                'building'=>'テストビル101',
+                'postal_code' => '111-2222',
+                'address' => '東京都新宿区',
+                'building' => 'テストビル101',
             ]
         );
 
         $response->assertRedirect(
-            route(
-                'purchase.create',
-                [
-                    'item_id'=>$item->id,
-                ]
-            )
+            route('purchase.create', [
+                'item_id' => $item->id,
+            ])
         );
 
         $this->assertEquals(

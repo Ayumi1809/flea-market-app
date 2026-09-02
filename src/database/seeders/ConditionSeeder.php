@@ -22,7 +22,7 @@ class ConditionSeeder extends Seeder
         ];
 
         foreach ($conditions as $condition) {
-            Condition::create([
+            Condition::firstOrcreate([
                 'name' => $condition,
             ]);
         }

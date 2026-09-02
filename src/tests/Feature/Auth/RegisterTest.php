@@ -18,9 +18,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHasErrors([
-            'name',
-        ]);
+        $response->assertSessionHasErrors(['name']);
     }
 
     public function test_email_is_required()
@@ -32,9 +30,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHasErrors([
-            'email',
-        ]);
+        $response->assertSessionHasErrors(['email']);
     }
 
     public function test_password_is_required()
@@ -46,9 +42,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => '',
         ]);
 
-        $response->assertSessionHasErrors([
-            'password',
-        ]);
+        $response->assertSessionHasErrors(['password']);
     }
 
     public function test_password_must_be_at_least_8_characters()
@@ -60,9 +54,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'pass123',
         ]);
 
-        $response->assertSessionHasErrors([
-            'password',
-        ]);
+        $response->assertSessionHasErrors(['password']);
     }
 
     public function test_password_confirmation_must_match()
@@ -74,9 +66,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        $response->assertSessionHasErrors([
-            'password',
-        ]);
+        $response->assertSessionHasErrors(['password']);
     }
 
     public function test_user_can_register()

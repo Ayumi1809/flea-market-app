@@ -10,8 +10,6 @@ class ItemDetailTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $seed = true;
-
     public function test_item_detail_displays_required_information()
     {
         $item = Item::with([
@@ -26,7 +24,7 @@ class ItemDetailTest extends TestCase
             'item_id' => $item->id,
         ]));
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         $response->assertSee($item->name);
 
@@ -62,7 +60,7 @@ class ItemDetailTest extends TestCase
             'item_id' => $item->id,
         ]));
 
-        $response->assertStatus(200);
+        $response->assertOk();
 
         foreach ($item->categories as $category) {
             $response->assertSee($category->name);

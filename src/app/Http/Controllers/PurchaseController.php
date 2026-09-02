@@ -158,6 +158,10 @@ class PurchaseController extends Controller
                 abort(403);
             }
 
+            if ($item->user_id === auth()->id()) {
+                abort(403);
+            }
+
             Purchase::create([
                 'user_id' => auth()->id(),
                 'item_id' => $item->id,

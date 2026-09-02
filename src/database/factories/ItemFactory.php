@@ -20,7 +20,7 @@ class ItemFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'condition_id' => Condition::factory(),
+            'condition_id' => Condition::inRandomOrder()->first()->id,
             'name' => $this->faker->word(),
             'brand_name' => $this->faker->company(),
             'description' => $this->faker->sentence(),
